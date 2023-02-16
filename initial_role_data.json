@@ -1,0 +1,22 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "Clean code",
+      "subtitle": "Clean",
+      "author": "Uncle robert",
+      "isbn": "1234"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "The dream machine",
+      "subtitle": "Dream machine",
+      "author": "Michael C. Jordan",
+      "isbn": "23333"
+    }
+  }
+]
