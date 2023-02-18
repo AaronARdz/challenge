@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from books.models import Book
+from zipcodes.models import Zipcode
 
-class BookSerializer(serializers.ModelSerializer):
+class ZipcodeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Book
-        fields = ("title", "subtitle", "author", "isbn")
+        model = Zipcode
+        fields = ("zip_code", "locality", "settlement", "locality")

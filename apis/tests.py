@@ -2,12 +2,12 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from books.models import Book
+from zipcodes.models import Zipcode
 
 class APITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.book = Book.objects.create(
+        cls.book = Zipcode.objects.create(
                     title="Django for APIs",
                     subtitle="Build web APIs with Python and Django",
                     author="William S. Vincent",

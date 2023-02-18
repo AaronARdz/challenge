@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # local
-    "books.apps.BooksConfig",
+    "zipcodes.apps.ZipcodesConfig",
     "rest_framework",
     "whitenoise.runserver_nostatic",
 ]
