@@ -1,32 +1,40 @@
+import math
+
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import Book, Zipcode
+from .models import Zipcode
 import pandas as pd
 import lxml
 
-def run():
-    df = pd.read_xml('Codigos.xml')
-    df = df.drop(['targetNamespace', 'elementFormDefault', 'import', 'element'], axis=1)
-
-    results = df.to_dict('records')
-
-    model_instances = [Zipcode(
-        zip_code=record['d_codigo'],
-        locality=record['d_ciudad'],
-        settlement=record['d_asenta'],
-        settlement_type=record['d_tipo_asenta'],
-        settlement_code=record['id_asenta_cpcons'],
-        zone_type=record['d_zona'],
-        municipality=record['D_mnpio'],
-        municipality_code=record['c_mnpio'],
-        federal_entity=record['d_estado'],
-        federal_entity_key=record['c_estado'],
-        federal_entity_code=record['c_CP'],
-    ) for record in results]
-
-    Zipcode.objects.bulk_create(model_instances)
-
-    return 0
+# def run():
+#     df = pd.read_xml('Codigos.xml')
+#     df = df.drop(['targetNamespace', 'elementFormDefault', 'import', 'element'], axis=1)
+#
+#     results = df.to_dict('records')
+#     model_instances = []
+#
+#     for record in results:
+#         if math.isnan(record['d_codigo']):
+#             continue
+#
+#         instance = Zipcode()
+#         instance.zip_code = int(record['d_codigo'])
+#         instance.locality = record['d_ciudad']
+#         instance.settlement = record['d_asenta']
+#         instance.settlement_type = record['d_tipo_asenta']
+#         instance.settlement_code = 0 if math.isnan(record['id_asenta_cpcons']) else int(record['id_asenta_cpcons'])
+#         instance.zone_type = record['d_zona']
+#         instance.municipality = record['D_mnpio']
+#         instance.municipality_code = 0 if math.isnan(record['c_mnpio']) else int(record['c_mnpio'])
+#         instance.federal_entity = record['d_estado']
+#         instance.federal_entity_key = 0 if math.isnan(record['c_estado']) else int(record['c_estado'])
+#         instance.federal_entity_code = 0 if math.isnan(record['c_CP']) else int(record['c_CP'])
+#
+#         model_instances.append(instance)
+#
+#     Zipcode.objects.bulk_create(model_instances)
+#
+#     return 0
 
 class ZipcodeListView(ListView):
     model = Zipcode
@@ -36,8 +44,8 @@ class ZipcodeListView(ListView):
     queryset = Zipcode.objects.all()
     print(queryset.count())
     # Check the books table is empty or not
-    if queryset.count() < 2:
-        run()
+    # if queryset.count() < 2:
+    #     run()
 
     # Return all records of the books table
     def get_queryset(self):
