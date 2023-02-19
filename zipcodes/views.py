@@ -1,12 +1,11 @@
 import math
 
-from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Zipcode
 import pandas as pd
 import lxml
 
-def run():
+def load_data():
     df = pd.read_xml('Codigos.xml')
     df = df.drop(['targetNamespace', 'elementFormDefault', 'import', 'element'], axis=1)
 
@@ -42,10 +41,9 @@ class ZipcodeListView(ListView):
 
    # Read all existing records of books table
     queryset = Zipcode.objects.all()
-    print(queryset.count())
     # Check the books table is empty or not
     if queryset.count() < 2:
-        run()
+        load_data()
 
     # Return all records of the books table
     def get_queryset(self):

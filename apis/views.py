@@ -11,14 +11,6 @@ from .serializers import ZipcodeSerializer
 
 no_zipcodes_found_msg = 'No zipcodes found'
 
-class ZipCodeAPIView(generics.ListAPIView):
-    serializer_class = ZipcodeSerializer
-    def get_queryset(self):
-        zipcode_number = self.kwargs['zipcode']
-        queryset = Zipcode.objects.filter(zip_code=zipcode_number)
-
-        return queryset
-
 class ZipcodeViewSet(APIView):
 
     def handle_data(self,results):

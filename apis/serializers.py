@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from zipcodes.models import Zipcode
 
+#test serializer
 settlement_list = []
 
 class ZipcodeSerializer(serializers.ModelSerializer):
