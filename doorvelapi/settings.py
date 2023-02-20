@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qk!8hx6zoftx--krffrr1j%j9$k=w2hfri9zg0c2zx@hni(^e5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["replaceforhost", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # local
-    "books.apps.BooksConfig",
+    "zipcodes.apps.ZipcodesConfig",
     "rest_framework",
     "whitenoise.runserver_nostatic",
 ]
@@ -78,10 +78,21 @@ WSGI_APPLICATION = 'doorvelapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'newdb.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'admin',
+        'PASSWORD': 'rootdoorvel',
+        'HOST': 'django-test.cpdjtxghqcxh.us-east-2.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
 

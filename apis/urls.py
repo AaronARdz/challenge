@@ -1,9 +1,11 @@
 # apis/urls.py
-from django.urls import path
+from django.urls import path,register_converter
 
-from .views import BookAPIView
+from .views import ZipcodeViewSet
+from . import converter
+
+register_converter(converter.FiveDigitZipcode, 'nnnnn')
 
 urlpatterns = [
-    path("", BookAPIView.as_view(), name="book_list"),
+    path("zipcodes/<int:zipcode>", ZipcodeViewSet.as_view(), name='zipcode_list')
 ]
-
